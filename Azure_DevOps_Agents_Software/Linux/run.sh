@@ -1,13 +1,18 @@
 #!/bin/bash
 
-echo "..............."
-echo "Start with software installation"
+print_header() {
+   lightcyan='\033[1;36m'
+   nocolor='\033[0m'
+   echo -e "${lightcyan}$1${nocolor}"
+}
 
-cd software
-$FileSum = ls | wc -l
-echo "Found ${FileSum} files"
+
+print_header "Start with software installation"
+
+cd software || exit
 
 for f in *.sh; do
-   echo "$f"
+   print_header "\n$f"
    bash "$f"
+   printf "done\n"
 done
