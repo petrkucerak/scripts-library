@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo 'Install teraform'
+echo 'Hello world'

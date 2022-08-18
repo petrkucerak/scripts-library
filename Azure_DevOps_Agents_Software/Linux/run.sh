@@ -1,32 +1,34 @@
 #!/bin/bash
 
-print_header() {
-   lightcyan='\033[1;36m'
-   nocolor='\033[0m'
-   echo -e "${lightcyan}$1${nocolor}"
-}
-
-print_header "Start with software installation"
+# variables
 
 repo_owner="petrkucerak"
 repo_name="scripts-library"
 repo_path="Azure_DevOps_Agents_Software/Linux/software"
 url="https://api.github.com/repos/${repo_owner}/${repo_name}/contents/${repo_path}"
 
-response=$(curl $url | jq -C -r '.[] | (.download_url)')
-IFS=' ' read -r -a sources <<<"$response"
+print_header() {
+   lightcyan='\033[1;36m'
+   nocolor='\033[0m'
+   echo -e "${lightcyan}$1${nocolor}"
+}
+
+print_header "START WITH SOFTWARE INSTALLATION"
+echo "Get list of scripts"
+
+## API limit!!!
+
+response=$(
+   curl \
+      -H "Accept: application/vnd.github+json" \
+      -H "Authorization: token $1" \
+      $url | jq -C -r '.[] | (.download_url)'
+)
+
+sources=($response)
 
 for source in "${sources[@]}"; do
-   echo "$source"
-done
+   print_header "\nRun script ${source}"
+   bash <(curl -s ${source})
 
-# curl \
-#   https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}
-
-cd software || exit
-
-for f in *.sh; do
-   print_header "\n$f"
-   bash "$f"
-   printf "done\n"
 done
