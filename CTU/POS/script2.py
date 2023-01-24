@@ -4,9 +4,9 @@ import numpy as np
 
 data = np.loadtxt("5V.txt")
 
-x1 = data[:, 2] - np.mean(data[:, 2])
-x2 = data[:, 3] - np.mean(data[:, 3])
+x1 = data[:, 4] - np.mean(data[:, 4])
+x2 = data[:, 5] - np.mean(data[:, 5])
 
-plt.xcorr(x1, x2, "full")
+plt.xcorr(x1, x2, "full", lw=3)
 plt.grid()
 plt.show()
