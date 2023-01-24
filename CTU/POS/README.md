@@ -1,3 +1,3 @@
-# B3M38POS - Pokročilé senzory
+# B3M38MSE - Moderní senzory
 
 Uloha: KOR - Korelační měření
