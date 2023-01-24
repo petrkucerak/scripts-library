@@ -1,29 +1,27 @@
 # import matplotlib library
 import matplotlib.pyplot as plt
 import numpy as np
- 
-# float lists for cross
-# correlation
-x=[11.37, 14.23, 16.3, 12.36,
-   6.54, 4.23, 19.11, 12.13,
-   19.91, 11.00]
- 
-y=[15.21, 12.23, 4.76, 9.89,
-   8.96, 19.26, 12.24, 11.54,
-   13.39, 18.96]
- 
-# Plot graph
-fig = plt.figure()
-ax1 = fig.add_subplot(211)
- 
-# cross correlation using
-# xcorr() function
-ax1.xcorr(x, y, usevlines=True,
-          maxlags=5, normed=True,
-          lw=2)
-# adding grid to the graph
-ax1.grid(True)
-ax1.axhline(0, color='blue', lw=2)
- 
-# show final plotted graph
+
+data = np.loadtxt("4V.txt")
+# data = np.loadtxt("5V.txt")
+
+# Hallovy
+x1 = data[:, 0] - np.mean(data[:, 0])
+x2 = data[:, 1] - np.mean(data[:, 1])
+
+# Infra
+# x1 = data[:, 0] - np.mean(data[:, 2])
+# x2 = data[:, 1] - np.mean(data[:, 3])
+
+# Foto
+# x1 = data[:, 0] - np.mean(data[:, 4])
+# x2 = data[:, 1] - np.mean(data[:, 5])
+
+# Proudy
+# x1 = data[:, 0] - np.mean(data[:, 6])
+# x2 = data[:, 1] - np.mean(data[:, 7])
+
+plt.plot(x1)
+plt.plot(x2)
+plt.grid()
 plt.show()
